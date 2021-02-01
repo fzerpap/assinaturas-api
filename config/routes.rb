@@ -19,4 +19,9 @@ Rails.application.routes.draw do
   		resources :currencies
   	end
   end
+  namespace 'api' do
+  	namespace 'v1' do
+  		resources :faturamentos
+  	end
+  end
 end

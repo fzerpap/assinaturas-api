@@ -13,7 +13,7 @@ describe Api::V1::CountriesController, type: :controller do
     end  
     it 'Deve retornar um json de Country, action: show' do
         country = Country.first
-        get :show, params: { id: 1 }
+        get :show, params: { id: country.id }
         response_body = JSON.parse(response.body)
         expect(response_body.fetch('data').fetch('id')).to eql(country.id)
     end   
