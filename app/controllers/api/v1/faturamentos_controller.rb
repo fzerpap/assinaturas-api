@@ -6,7 +6,8 @@ module Api
       # GET /faturamentos
       def index
         @faturamentos = Faturamento.order('created_at DESC')
-        render json: {status: 'SUCCESS', message:'Faturamentos Loaded', data: @faturamentos},status: :ok
+        #render json: {status: 'SUCCESS', message:'Faturamentos Loaded', data: @faturamentos},status: :ok
+        render json: @faturamentos
 
       end
 
