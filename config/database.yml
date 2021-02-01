@@ -1,0 +1,18 @@
+default: &default
+  adapter: postgresql
+  encoding: UTF-8
+  port: 5432
+  username: postgres
+  password: 123456
+  # For details on connection pooling, see Rails configuration guide
+  # https://guides.rubyonrails.org/configuring.html#database-pooling
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  database: financiero_api_development
+
+ 
+test:
+  <<: *default
+  database: financiero_api_test
