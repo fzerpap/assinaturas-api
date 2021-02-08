@@ -5,9 +5,10 @@ module Api
 
       # GET /faturamentos
       def index
-        @faturamentos = Faturamento.order('created_at DESC')
+        render json: FaturamentoSerializer.new(Faturamento.order('created_at DESC'))
+        #@faturamentos = Faturamento.order('created_at DESC')
         #render json: {status: 'SUCCESS', message:'Faturamentos Loaded', data: @faturamentos},status: :ok
-        render json: @faturamentos
+        #render json: @faturamentos
 
       end
 

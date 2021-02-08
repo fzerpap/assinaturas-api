@@ -5,8 +5,9 @@ module Api
 
       # GET /empresas
       def index
-        @empresas = Empresa.order('created_at DESC')
-				render json: {status: 'SUCCESS', message:'Empresas Loaded', data: @empresas},status: :ok
+        render json: EmpresaSerializer.new(Empresa.all)
+        #@empresas = Empresa.order('created_at DESC')
+				#render json: {status: 'SUCCESS', message:'Empresas Loaded', data: @empresas},status: :ok
       end
 
       # GET /empresas/1
