@@ -5,8 +5,15 @@ module Api
 
       # GET /countries
       def index
-        @countries = Country.order('created_at ASC')
-				render json: {status: 'SUCCESS', message:'Countries Loaded', data: @countries},status: :ok
+        render json: CountrySerializer.new(Country.all)
+        #render json: Country.order('created_at ASC')
+        #@countries = Country.order('created_at ASC')
+
+        #render json: {status: 'SUCCESS', message:'Countries Loaded', data: @countries}, status: :ok
+       
+        #render json: @countries, methods: :author, only: [:name, :language_id, :currency_id], root: true
+        
+        #render json: @countries, only: [:name, :language_id, :currency_id]
 			end
       
       # GET /countries/1

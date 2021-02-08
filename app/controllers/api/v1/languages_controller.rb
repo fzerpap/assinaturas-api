@@ -5,8 +5,9 @@ module Api
 
       # GET /languages
       def index
-        @languages = Language.order('created_at DESC')
-				render json: {status: 'SUCCESS', message:'Languages Loaded', data: @languages},status: :ok
+        render json: LanguageSerializer.new(Language.order('created_at DESC'))
+        #@languages = Language.order('created_at DESC')
+				#render json: {status: 'SUCCESS', message:'Languages Loaded', data: @languages},status: :ok
       end
 
       # GET /languages/1

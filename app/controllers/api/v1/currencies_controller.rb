@@ -5,8 +5,9 @@ module Api
 
       # GET /currencies
       def index
-        @currencies = Currency.order('created_at DESC')
-				render json: {status: 'SUCCESS', message:'Currencies Loaded', data: @currencies},status: :ok
+        render json: CurrencySerializer.new(Currency.order('created_at DESC'))
+        #@currencies = Currency.order('created_at DESC')
+				#render json: {status: 'SUCCESS', message:'Currencies Loaded', data: @currencies},status: :ok
       end
 
       # GET /currencies/1

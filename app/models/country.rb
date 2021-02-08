@@ -12,4 +12,30 @@ class Country < ApplicationRecord
   def safe_to_delete
     return empresas.any? ? false : true
   end
+
+  #def as_json(options={})
+  #  super(root: true,
+  #        methods: [:author, :language_name, :currency_name] )
+  #end
+
+  #def as_json(options={})
+  #  super(root: true,
+  #        include: { language: {only: [:id, :name] }},
+  #        include: { currency: {only: [:id, :name] }},
+  #        methods: :author )
+  #end
+
+  def author
+    "Francisco Zerpa"
+  end
+  def language_name
+    self.language.name
+  end
+
+  def currency_name
+    self.currency.name
+  end
+
+
+
 end
