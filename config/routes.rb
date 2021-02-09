@@ -1,27 +1,23 @@
 Rails.application.routes.draw do
   namespace 'api' do
   	namespace 'v1' do
-  		resources :empresas
+  		resources :assinaturas
   	end
   end
   namespace 'api' do
   	namespace 'v1' do
-  		resources :countries
+  		resources :modelos
   	end
   end
   namespace 'api' do
   	namespace 'v1' do
-  		resources :languages
+  		resources :marcas
   	end
   end
   namespace 'api' do
   	namespace 'v1' do
-  		resources :currencies
+  		resources :clientes
   	end
   end
-  namespace 'api' do
-  	namespace 'v1' do
-  		resources :faturamentos
-  	end
-  end
+
 end

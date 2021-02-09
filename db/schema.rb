@@ -10,57 +10,48 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20210201114403) do
+ActiveRecord::Schema.define(version: 20210208234801) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "countries", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "currency_id"
-    t.integer  "language_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.index ["currency_id"], name: "index_countries_on_currency_id", using: :btree
-    t.index ["language_id"], name: "index_countries_on_language_id", using: :btree
+  create_table "assinaturas", force: :cascade do |t|
+    t.string   "imei"
+    t.decimal  "preco_anual",     precision: 10, scale: 2, default: "0.0"
+    t.integer  "num_parcelas"
+    t.integer  "modelo_id"
+    t.integer  "cliente_id"
+    t.datetime "created_at",                                               null: false
+    t.datetime "updated_at",                                               null: false
+    t.date     "data_emisao"
+    t.date     "data_vencimento"
+    t.index ["cliente_id"], name: "index_assinaturas_on_cliente_id", using: :btree
+    t.index ["modelo_id"], name: "index_assinaturas_on_modelo_id", using: :btree
   end
 
-  create_table "currencies", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "empresas", force: :cascade do |t|
+  create_table "clientes", force: :cascade do |t|
     t.string   "nome"
-    t.string   "cnpj"
-    t.string   "cep"
-    t.decimal  "caixa_principal_saldo", precision: 10, scale: 2, default: "0.0"
-    t.decimal  "caixa_troco_saldo",     precision: 10, scale: 2, default: "0.0"
-    t.date     "data_inicio_saldo"
-    t.integer  "country_id"
-    t.datetime "created_at",                                                     null: false
-    t.datetime "updated_at",                                                     null: false
-    t.index ["country_id"], name: "index_empresas_on_country_id", using: :btree
-  end
-
-  create_table "faturamentos", force: :cascade do |t|
-    t.date     "data"
-    t.decimal  "valor"
-    t.integer  "empresa_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["empresa_id"], name: "index_faturamentos_on_empresa_id", using: :btree
-  end
-
-  create_table "languages", force: :cascade do |t|
-    t.string   "name"
+    t.string   "cpf"
+    t.string   "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "countries", "currencies"
-  add_foreign_key "countries", "languages"
-  add_foreign_key "empresas", "countries"
-  add_foreign_key "faturamentos", "empresas"
+  create_table "marcas", force: :cascade do |t|
+    t.string   "nome"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "modelos", force: :cascade do |t|
+    t.string   "nome"
+    t.integer  "marca_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["marca_id"], name: "index_modelos_on_marca_id", using: :btree
+  end
+
+  add_foreign_key "assinaturas", "clientes"
+  add_foreign_key "assinaturas", "modelos"
+  add_foreign_key "modelos", "marcas"
 end

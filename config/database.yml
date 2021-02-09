@@ -10,9 +10,9 @@ default: &default
 
 development:
   <<: *default
-  database: financiero_api_development
+  database: bd_assinaturas
 
  
 test:
   <<: *default
-  database: financiero_api_test
+  database: bd_assinaturas_test
