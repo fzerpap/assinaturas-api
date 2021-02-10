@@ -3,7 +3,18 @@ require 'rails_helper'
 RSpec.describe Marca, type: :marca do
   fixtures :marcas, :modelos
   
-  context 'Validacao do modelo' do
+  context 'Validacao de associacoes do modelo' do
+
+    it 'Devería has_many :modelos' do
+      marca = marcas(:samsung)
+      modelos = marca.modelos
+      expect(modelos.count).to eql(2)
+
+    end
+
+  end
+
+  context 'Validacao de atributos do modelo' do
 
     it 'Devería ser valido com todos os atributos' do
       marca = Marca.create(nome: 'Sony') 

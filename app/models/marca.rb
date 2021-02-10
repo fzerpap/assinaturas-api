@@ -10,3 +10,4 @@ class Marca < ApplicationRecord
         return modelos.any? ? false : true
     end
 end
+

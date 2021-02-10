@@ -63,7 +63,7 @@ module Api
         # Only allow a trusted parameter "white list" through.
         def assinatura_params
           params.require(:assinatura).permit(:imei, :preco_anual, :num_parcelas, :modelo_id, :cliente_id,
-                                             :data_emisao, :data_vencimento)
+                                             :data_emisao, :data_vencimento, :status)
         end
     end
   end

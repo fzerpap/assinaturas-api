@@ -1,6 +1,5 @@
 class Modelo < ApplicationRecord
   belongs_to :marca
-
   has_many :assinaturas
 
   validates :nome, :marca_id, presence: true
@@ -12,3 +11,4 @@ class Modelo < ApplicationRecord
     return assinaturas.any? ? false : true
   end
 end
+

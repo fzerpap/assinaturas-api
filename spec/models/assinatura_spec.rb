@@ -6,9 +6,26 @@ RSpec.describe Assinatura, type: :assinatura do
   before(:each) do
     @cliente = clientes(:rm)
     @modelo = modelos(:iphone6)
+    @assinatura = assinaturas(:aym1)
   end
 
-  context 'Validacao do assinatura' do
+  context 'Validacao de associacoes do modelo' do
+
+    it 'Devería belongs_to :cliente' do
+      cliente = @assinatura.cliente
+      expect(cliente.nome).to eql('Yosely Molina')
+
+    end
+
+    it 'Devería belongs_to :modelo' do
+      modelo = @assinatura.modelo
+      expect(modelo.nome).to eql('A10')
+
+    end
+
+  end
+
+  context 'Validacao de atributos do modelo' do
 
     it 'Devería ser valido com todos os atributos' do
       assinatura = Assinatura.create(imei: '543210123456789', preco_anual: 340.00, num_parcelas: 4, 

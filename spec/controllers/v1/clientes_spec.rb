@@ -21,6 +21,12 @@ describe Api::V1::ClientesController, type: :controller do
         expect(response_body.fetch('data').fetch('id').to_i).to eql(cliente.id)
     end   
 
+    it 'Deve retornar uma mensagem: ID do cliente nao existe, action: show' do
+        get :show, params: { id: 99999999 }
+        response_body = JSON.parse(response.body)
+        expect(response_body.fetch('message')).to eql('ID do cliente nao existe')
+    end 
+
     it 'Deve criar um cliente, action: create' do
         post :create, params: { "cliente": { nome: "Ana Siva", cpf: '234565467', email: 'asilva@gmail.com' }}
         response_body = JSON.parse(response.body)
@@ -33,6 +39,13 @@ describe Api::V1::ClientesController, type: :controller do
         expect(response.status).to eql(200)
 
     end   
- 
+
+    it 'Deve retornar uma mensagem: ID do cliente nao existe, action: destroy' do
+        delete :destroy, params: { id: 999999999  }
+        response_body = JSON.parse(response.body)
+        expect(response_body.fetch('message')).to eql('ID do cliente nao existe')
+
+    end   
+
 end
 

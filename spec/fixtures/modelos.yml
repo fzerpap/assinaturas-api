@@ -14,4 +14,8 @@ iphone4:
   nome: 'iPhone4'
   marca: apple
 
+galaxy_on:
+  nome: 'Galaxy On'
+  marca: samsung
+
 

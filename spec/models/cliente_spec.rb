@@ -1,9 +1,20 @@
 require 'rails_helper'
 
 RSpec.describe Cliente, type: :cliente do
-  fixtures :clientes
 
-  context 'Validacao do cliente' do
+  fixtures :clientes, :assinaturas
+
+  context 'Validacao de associacoes do modelo' do
+
+    it 'Devería has_many :assinaturas' do
+      cliente = clientes(:ym)
+      assinaturas = cliente.assinaturas
+      expect(assinaturas.count).to eql(1)
+
+    end
+
+  end
+  context 'Validacao de atributos do modelo' do
 
     it 'Devería ser valido com todos os atributos' do
       cliente = Cliente.create(nome: 'Benjamin Zerpa', cpf: '23987667854', email: 'bzerpa@gmail.com') 

@@ -19,6 +19,7 @@ module Api
 
       # POST /marcas
       def create
+        @marca = Marca.new(marca_params)
         if @marca.save
           render json: MarcaSerializer.new(@marca), status: :created
         else
@@ -42,9 +43,8 @@ module Api
       # DELETE /marcas/1
       def destroy
         if !@marca.nil?
-          if @marca.destroyed?
-            @marca.destroy
-            render json:MarcaSerializer.new(@marca), status: :ok
+          if @marca.destroy
+             render json:MarcaSerializer.new(@marca), status: :ok
           else
             render json: {status: 'ERROR', message:'Viola a chave de integridade'},status: :unprocessable_entity
           end

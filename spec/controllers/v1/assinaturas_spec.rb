@@ -24,6 +24,12 @@ describe Api::V1::AssinaturasController, type: :controller do
         get :show, params: { id: assinatura.id }
         response_body = JSON.parse(response.body)
         expect(response_body.fetch('data').fetch('id').to_i).to eql(assinatura.id)
+    end  
+
+    it 'Deve retornar uma mensagem: ID da assinatura nao existe, action: show' do
+        get :show, params: { id: 99999999 }
+        response_body = JSON.parse(response.body)
+        expect(response_body.fetch('message')).to eql('ID da assinatura nao existe')
     end   
 
     it 'Deve criar uma assinatura, action: create' do
@@ -37,6 +43,13 @@ describe Api::V1::AssinaturasController, type: :controller do
         assinatura = assinaturas(:afz1)
         delete :destroy, params: { id: assinatura.id  }
         expect(response.status).to eql(200)
+
+    end   
+ 
+    it 'Deve retornar uma mensagem: ID da assinatura nao existe, action: destroy' do
+        delete :destroy, params: { id: 999999999  }
+        response_body = JSON.parse(response.body)
+        expect(response_body.fetch('message')).to eql('ID da assinatura nao existe')
 
     end   
  
