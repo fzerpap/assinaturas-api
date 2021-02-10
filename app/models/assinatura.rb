@@ -9,6 +9,6 @@ class Assinatura < ApplicationRecord
   before_destroy :safe_to_delete
 
   def safe_to_delete
-    return assinaturas.any? ? false : true
+    return Date.today > data_vencimento ? true : false
   end
 end

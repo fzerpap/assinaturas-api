@@ -6,45 +6,57 @@ module Api
       # GET /marcas
       def index
         render json: MarcaSerializer.new(Marca.all)
-        #@marcas = Marca.all
-
-        #render json: @marcas
       end
 
       # GET /marcas/1
       def show
-        render json: @marca
+        if !@marca.nil?
+          render json: MarcaSerializer.new(@marca)
+        else
+          render json: {status: 'ERROR', message:'ID da marca nao existe'},status: :unprocessable_entity
+        end  
       end
 
       # POST /marcas
       def create
-        @marca = Marca.new(marca_params)
-
         if @marca.save
-          render json: @marca, status: :created, location: @marca
+          render json: MarcaSerializer.new(@marca), status: :created
         else
-          render json: @marca.errors, status: :unprocessable_entity
+         render json: @marca.errors, status: :unprocessable_entity
         end
       end
 
       # PATCH/PUT /marcas/1
       def update
-        if @marca.update(marca_params)
-          render json: @marca
+        if !@marca.nil?
+          if @marca.update(marca_params)
+            render json:  MarcaSerializer.new(@marca), status: :ok
+          else
+            render json: @marca.errors, status: :unprocessable_entity
+          end
         else
-          render json: @marca.errors, status: :unprocessable_entity
+          render json: {status: 'ERROR', message:'ID da marca nao existe'},status: :unprocessable_entity
         end
       end
 
       # DELETE /marcas/1
       def destroy
-        @marca.destroy
+        if !@marca.nil?
+          if @marca.destroyed?
+            @marca.destroy
+            render json:MarcaSerializer.new(@marca), status: :ok
+          else
+            render json: {status: 'ERROR', message:'Viola a chave de integridade'},status: :unprocessable_entity
+          end
+        else
+          render json: {status: 'ERROR', message:'ID da marca nao existe'},status: :unprocessable_entity
+        end
       end
 
       private
         # Use callbacks to share common setup or constraints between actions.
         def set_marca
-          @marca = Marca.find(params[:id])
+          @marca = Marca.find(params[:id]) rescue nil
         end
 
         # Only allow a trusted parameter "white list" through.

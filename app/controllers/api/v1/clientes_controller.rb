@@ -5,24 +5,23 @@ module Api
 
       # GET /clientes
       def index
-        
         render json: ClienteSerializer.new(Cliente.all)
-
-        #@clientes = Cliente.all
-        #render json: @clientes
       end
 
       # GET /clientes/1
       def show
-        render json: @cliente
+        if !@cliente.nil?
+          render json: ClienteSerializer.new(@cliente)
+        else
+          render json: {status: 'ERROR', message:'ID do cliente nao existe'},status: :unprocessable_entity
+        end  
       end
 
       # POST /clientes
       def create
         @cliente = Cliente.new(cliente_params)
-
         if @cliente.save
-          render json: @cliente, status: :created, location: @cliente
+          render json: ClienteSerializer.new(@cliente), status: :created
         else
           render json: @cliente.errors, status: :unprocessable_entity
         end
@@ -30,22 +29,34 @@ module Api
 
       # PATCH/PUT /clientes/1
       def update
-        if @cliente.update(cliente_params)
-          render json: @cliente
+        if !@cliente.nil?
+          if @cliente.update(cliente_params)
+            render json:  ClienteSerializer.new(@cliente), status: :ok
+          else
+            render json: @cliente.errors, status: :unprocessable_entity
+          end
         else
-          render json: @cliente.errors, status: :unprocessable_entity
+          render json: {status: 'ERROR', message:'ID do cliente nao existe'},status: :unprocessable_entity
         end
       end
 
       # DELETE /clientes/1
       def destroy
-        @cliente.destroy
+        if !@cliente.nil?
+          if @cliente.destroy
+            render json: {status: 'OK', message:'cliente excluido', data: @cliente },status: :ok
+          else
+            render json: {status: 'ERROR', message:'Viola a chave de integridade'},status: :unprocessable_entity
+          end
+        else
+          render json: {status: 'ERROR', message:'ID do cliente nao existe'},status: :unprocessable_entity
+        end
       end
 
       private
         # Use callbacks to share common setup or constraints between actions.
         def set_cliente
-          @cliente = Cliente.find(params[:id])
+          @cliente = Cliente.find(params[:id]) rescue nil
         end
 
         # Only allow a trusted parameter "white list" through.

@@ -5,16 +5,16 @@ module Api
 
       # GET /assinaturas
       def index
-        
         render json: AssinaturaSerializer.new(Assinatura.all)
-
-        #@assinaturas = Assinatura.all
-        #render json: @assinaturas
       end
 
       # GET /assinaturas/1
       def show
-        render json: @assinatura
+        if !@assinatura.nil?
+          render json: AssinaturaSerializer.new(@assinatura)
+        else
+          render json: {status: 'ERROR', message:'ID da assinatura nao existe'},status: :unprocessable_entity
+        end  
       end
 
       # POST /assinaturas
@@ -22,7 +22,7 @@ module Api
         @assinatura = Assinatura.new(assinatura_params)
 
         if @assinatura.save
-          render json: @assinatura, status: :created, location: @assinatura
+          render json: AssinaturaSerializer.new(@assinatura), status: :created
         else
           render json: @assinatura.errors, status: :unprocessable_entity
         end
@@ -30,27 +30,40 @@ module Api
 
       # PATCH/PUT /assinaturas/1
       def update
-        if @assinatura.update(assinatura_params)
-          render json: @assinatura
+        if !@assinatura.nil?
+          if @assinatura.update(assinatura_params)
+            render json:  AssinaturaSerializer.new(@assinatura), status: :ok
+          else
+            render json: @assinatura.errors, status: :unprocessable_entity
+          end
         else
-          render json: @assinatura.errors, status: :unprocessable_entity
+          render json: {status: 'ERROR', message:'ID da assinatura nao existe'},status: :unprocessable_entity
         end
       end
 
       # DELETE /assinaturas/1
       def destroy
-        @assinatura.destroy
+        if !@assinatura.nil?
+          if @assinatura.destroy
+            render json: {status: 'OK', message:'cliente excluido', data: @assinatura },status: :ok
+          else
+            render json: {status: 'ERROR', message:'Viola a chave de integridade'},status: :unprocessable_entity
+          end
+        else
+          render json: {status: 'ERROR', message:'ID da assinatura nao existe'},status: :unprocessable_entity
+        end
       end
 
       private
         # Use callbacks to share common setup or constraints between actions.
         def set_assinatura
-          @assinatura = Assinatura.find(params[:id])
+          @assinatura = Assinatura.find(params[:id]) rescue nil
         end
 
         # Only allow a trusted parameter "white list" through.
         def assinatura_params
-          params.require(:assinatura).permit(:imei, :preco_anual, :num_parcelas, :modelo_id, :cliente_id)
+          params.require(:assinatura).permit(:imei, :preco_anual, :num_parcelas, :modelo_id, :cliente_id,
+                                             :data_emisao, :data_vencimento)
         end
     end
   end

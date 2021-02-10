@@ -1,0 +1,17 @@
+a10:
+  nome: 'A10'
+  marca: samsung
+
+a20:
+  nome: 'A20'
+  marca: samsung
+
+iphone6:
+  nome: 'iPhone6'
+  marca: apple
+
+iphone4:
+  nome: 'iPhone4'
+  marca: apple
+
+

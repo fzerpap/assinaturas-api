@@ -24,6 +24,7 @@ c1    = Cliente.create!(nome: 'Francisco Zerpa', cpf: '239856956847', email: 'fz
 c2    = Cliente.create!(nome: 'Yosely Molina', cpf: '239856954201', email: 'ymolina@gmail.com')
 c3    = Cliente.create!(nome: 'Rebeca Molina', cpf: '239856956890', email: 'rmolina@gmail.com')
 
+
 puts "INIT ASSINATURAS"
 a1    = Assinatura.create!(imei: '123456789012345', preco_anual: 300.90, num_parcelas: 6, 
             modelo: a10,cliente: c1, data_emisao: '03/01/2021'.to_date, data_vencimento: '02/01/2022'.to_date)

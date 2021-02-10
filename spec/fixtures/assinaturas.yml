@@ -1,0 +1,31 @@
+afz1:
+  imei: '123456789012345'
+  preco_anual: 250.50
+  num_parcelas: 6
+  modelo: a20
+  cliente: fz
+  data_emisao: 05/10/2018
+  data_vencimento: 05/10/2019
+
+afz2:
+  imei: '123456789012345'
+  preco_anual: 250.50
+  num_parcelas: 6
+  modelo: a20
+  cliente: fz
+  data_emisao: 05/01/2021
+  data_vencimento: 05/01/2022
+
+aym1:
+  imei: '663456789012370'
+  preco_anual: 210.50
+  num_parcelas: 6
+  modelo: a10
+  cliente: ym
+  data_emisao: 20/01/2021
+  data_vencimento: 20/01/2022
+
+
+
+ 
+ 

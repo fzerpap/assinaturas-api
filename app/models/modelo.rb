@@ -9,6 +9,6 @@ class Modelo < ApplicationRecord
   before_destroy :safe_to_delete
 
   def safe_to_delete
-      return assinaturas.any? ? false : true
+    return assinaturas.any? ? false : true
   end
 end

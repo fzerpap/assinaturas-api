@@ -1,0 +1,13 @@
+samsung:
+  nome: 'Samsung'
+
+apple:
+  nome: 'Apple'
+
+lg:
+  nome: 'LG'
+
+huawei:
+  nome: 'Huawei'
+ 
+ 
