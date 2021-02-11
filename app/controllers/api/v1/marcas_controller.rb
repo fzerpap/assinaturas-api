@@ -6,7 +6,7 @@ module Api
       # GET /marcas
       def index
         #render json: MarcaSerializer.new(Marca.all)
-        render json: Marca.all
+        render json: Marca.order(:nome)
       end
 
       # GET /marcas/1

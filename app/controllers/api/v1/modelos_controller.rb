@@ -5,13 +5,15 @@ module Api
 
       # GET /modelos
       def index
-        render json: ModeloSerializer.new(Modelo.all)
+        #render json: ModeloSerializer.new(Modelo.all)
+        render json: Modelo.order(:marca_id)
       end
 
       # GET /modelos/1
       def show
         if !@modelo.nil?
-          render json: ModeloSerializer.new(@modelo)
+          #render json: ModeloSerializer.new(@modelo)
+          render json: @modelo
         else
           render json: {status: 'ERROR', message:'ID do modelo nao existe'},status: :unprocessable_entity
         end  
