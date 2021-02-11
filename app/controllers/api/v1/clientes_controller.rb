@@ -5,13 +5,15 @@ module Api
 
       # GET /clientes
       def index
-        render json: ClienteSerializer.new(Cliente.all)
+        #render json: ClienteSerializer.new(Cliente.all)
+        render json: Cliente.order(:nome)
       end
 
       # GET /clientes/1
       def show
         if !@cliente.nil?
-          render json: ClienteSerializer.new(@cliente)
+          #render json: ClienteSerializer.new(@cliente)
+          render json: @cliente
         else
           render json: {status: 'ERROR', message:'ID do cliente nao existe'},status: :unprocessable_entity
         end  

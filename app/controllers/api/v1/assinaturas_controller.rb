@@ -5,13 +5,15 @@ module Api
 
       # GET /assinaturas
       def index
-        render json: AssinaturaSerializer.new(Assinatura.all)
+        render json: Assinatura.where(data_emisao: Date.today)
+        #render json: AssinaturaSerializer.new(Assinatura.all)
       end
 
       # GET /assinaturas/1
       def show
         if !@assinatura.nil?
-          render json: AssinaturaSerializer.new(@assinatura)
+          render json: @assinatura
+          #render json: AssinaturaSerializer.new(@assinatura)
         else
           render json: {status: 'ERROR', message:'ID da assinatura nao existe'},status: :unprocessable_entity
         end  
