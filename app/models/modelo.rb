@@ -12,3 +12,4 @@ class Modelo < ApplicationRecord
   end
 end
 
+

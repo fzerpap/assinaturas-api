@@ -4,6 +4,8 @@ class Cliente < ApplicationRecord
   validates :nome, :cpf, :email, presence: true
   validates :cpf, uniqueness: true
 
+  accepts_nested_attributes_for :assinaturas
+
   before_destroy :safe_to_delete
 
   def safe_to_delete

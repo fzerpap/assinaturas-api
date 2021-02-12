@@ -1,11 +1,12 @@
 class Assinatura < ApplicationRecord
   belongs_to :modelo
-  belongs_to :cliente
+  belongs_to :cliente, optional: true
+  
 
   enum status: [:ativa, :cancelada, :vencida]
 
-  validates :imei, :preco_anual, :num_parcelas, :modelo_id, :cliente_id, 
-            :data_emisao, :data_vencimento, presence: true
+  #validates :imei, :preco_anual, :num_parcelas, :modelo_id, :data_emisao, :data_vencimento, presence: true
+  validates :imei, :preco_anual, :num_parcelas, :modelo_id, presence: true
   validates :imei, uniqueness: true
 
   before_destroy :safe_to_delete

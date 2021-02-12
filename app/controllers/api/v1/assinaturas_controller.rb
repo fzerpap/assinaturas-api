@@ -5,8 +5,8 @@ module Api
 
       # GET /assinaturas
       def index
-        render json: Assinatura.where(data_emisao: Date.today)
-        #render json: AssinaturaSerializer.new(Assinatura.all)
+        #render json: Assinatura.where(data_emisao: Date.today)
+        render json: AssinaturaSerializer.new(Assinatura.all)
       end
 
       # GET /assinaturas/1

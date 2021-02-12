@@ -5,3 +5,4 @@ class ModeloSerializer
   belongs_to :marca, serializer: MarcaSerializer
 
 end
+

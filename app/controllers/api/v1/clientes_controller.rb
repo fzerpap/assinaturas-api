@@ -63,7 +63,9 @@ module Api
 
         # Only allow a trusted parameter "white list" through.
         def cliente_params
-          params.require(:cliente).permit(:nome, :cpf, :email)
+          params.require(:cliente).permit(:nome, :cpf, :email, 
+            assinaturas_attributes: [:id, :imei, :preco_anual, :num_parcelas, :modelo_id, 
+                                    :data_emisao, :data_vencimento])
         end
     end
   end
