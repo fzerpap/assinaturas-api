@@ -15,7 +15,7 @@ module Api
           render json: @marca
           #render json: MarcaSerializer.new(@marca)
         else
-          render json: {status: 'ERROR', message:'ID da marca nao existe'},status: :unprocessable_entity
+          render json: {status: 'ERROR', message:'ID ou nome da marca nao existe'},status: :unprocessable_entity
         end  
       end
 
@@ -58,7 +58,15 @@ module Api
       private
         # Use callbacks to share common setup or constraints between actions.
         def set_marca
-          @marca = Marca.find(params[:id]) rescue nil
+          if !params[:modelo_id].nil?
+            @marca = Modelo.find(params[:modelo_id]).marca rescue nil
+          else  
+            if params[:id].to_i != 0
+              @marca = Marca.find(params[:id]) rescue nil
+            else  
+              @marca = Marca.find_by_nome(params[:id]) rescue nil
+            end
+          end  
         end
 
         # Only allow a trusted parameter "white list" through.

@@ -5,7 +5,7 @@ module Api
 
       # GET /assinaturas
       def index
-        render json: Assinatura.where(data_emisao: Date.today)
+        render json: Assinatura.all
         #render json: AssinaturaSerializer.new(Assinatura.all)
       end
 
@@ -59,7 +59,11 @@ module Api
       private
         # Use callbacks to share common setup or constraints between actions.
         def set_assinatura
-          @assinatura = Assinatura.find(params[:id]) rescue nil
+          if params[:cliente_id].nil?
+            @assinatura = Assinatura.find(params[:id]) rescue nil
+          else
+            @assinatura = Cliente.find(params[:cliente_id]).assinaturas rescue nil
+          end
         end
 
         # Only allow a trusted parameter "white list" through.

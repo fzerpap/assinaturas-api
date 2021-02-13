@@ -5,10 +5,9 @@ class Assinatura < ApplicationRecord
 
   enum status: [:ativa, :cancelada, :vencida]
 
-  #validates :imei, :preco_anual, :num_parcelas, :modelo_id, :data_emisao, :data_vencimento, presence: true
+  validates :imei, :preco_anual, :num_parcelas, :modelo_id, :data_emisao, :data_vencimento, presence: true
   validates :imei, :preco_anual, :num_parcelas, :modelo_id, presence: true
-  validates :imei, uniqueness: true
-
+  
   before_destroy :safe_to_delete
 
   def safe_to_delete
