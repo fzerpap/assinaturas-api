@@ -59,7 +59,7 @@ module Api
       private
         # Use callbacks to share common setup or constraints between actions.
         def set_modelo
-          if !params[:id].nil?
+          if params[:marca_id].nil?
             if params[:id].to_i != 0
               @modelo = Modelo.find(params[:id]) rescue nil
             else
