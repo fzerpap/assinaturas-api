@@ -22,7 +22,7 @@ RSpec.describe Cliente, type: :cliente do
 
     it 'Devería ser valido com todos os atributos e atributos aninhados da assinatura' do
      
-      cliente = Cliente.new(nome: 'Antonio Parra Zerpa', cpf: '103769955557667390', email: 'aparra@gmail.com')
+      cliente = Cliente.new(nome: 'Antonio Parra Zerpa', cpf: '1011169911155551777117667390', email: 'aparra@gmail.com')
       cliente.assinaturas.build({imei: '817655669918990', preco_anual: 340.00, num_parcelas: 4, 
                   modelo_id: 25, data_emisao: Date.today, data_vencimento: Date.today+365})
       

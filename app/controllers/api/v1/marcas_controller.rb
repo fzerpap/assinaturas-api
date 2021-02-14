@@ -69,6 +69,8 @@ module Api
           end  
         end
 
+
+
         # Only allow a trusted parameter "white list" through.
         def marca_params
           #params.require(:marca).permit(:nome)

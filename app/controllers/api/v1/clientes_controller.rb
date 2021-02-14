@@ -59,8 +59,12 @@ module Api
         # Use callbacks to share common setup or constraints between actions.
         def set_cliente
           @cliente = Cliente.find(params[:id]) rescue nil
+          if @cliente.nil?
+            @cliente = Cliente.find_by_cpf(params[:id]) rescue nil
+          end  
         end
 
+ 
         # Only allow a trusted parameter "white list" through.
         def cliente_params
           params.require(:cliente).permit(:nome, :cpf, :email, 

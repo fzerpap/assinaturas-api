@@ -8,7 +8,10 @@ Rails.application.routes.draw do
 
 		end
 
-		resources :marcas
+		resources :marcas do
+			resource :modelos, only: [:show]
+		end
+		
 		resources :clientes do
 			resource :assinaturas, only: [:show]
 
