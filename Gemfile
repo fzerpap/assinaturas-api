@@ -31,3 +31,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 #A lightning fast JSON:API serializer for Ruby Objects.
 gem 'fast_jsonapi'
+

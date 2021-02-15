@@ -12,24 +12,23 @@ describe Api::V1::ModelosController, type: :controller do
         expect(response.status).to eql(200)
     end  
 
-    it 'Devería retornar um json de modelos e o primeiro modelo deve ser A10, action: index' do
-        get :index
-        response_body = JSON.parse(response.body)
-        expect(response_body.fetch('data')[0].fetch('attributes').fetch('nome')).to eql('A10')
-    end  
 
     it 'Deve retornar um json de Modelo, action: show' do
         modelo = modelos(:a20)
         get :show, params: { id: modelo.id }
-        response_body = JSON.parse(response.body)
-        expect(response_body.fetch('data').fetch('id').to_i).to eql(modelo.id)
-    end   
+        expect(response.status).to eql(200)
+     end   
+
+    it 'Deve retornar um json de Modelos para una marca, action: show' do
+        marca = marcas(:samsung)
+        get :show, params: { marca_id: marca.id }
+        expect(response.status).to eql(200)
+     end   
 
     it 'Deve criar um modelo, action: create' do
-        post :create, params: { "modelo": { nome: "Galaxy Note", marca: @marca}}
-        response_body = JSON.parse(response.body)
+        post :create, params: { "modelo": { nome: "Galaxy Note", marca_id: @marca.id}}
         expect(response.status).to eql(201)
-    end  
+     end  
 
     it 'Deve excluir um modelo, action: destroy' do
         modelo = modelos(:galaxy_on)

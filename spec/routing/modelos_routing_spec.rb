@@ -10,6 +10,9 @@ RSpec.describe Api::V1::ModelosController, type: :routing do
       expect(get: "api/v1/modelos/1").to route_to("api/v1/modelos#show", id: "1")
     end
 
+    it "routes to #show" do
+      expect(get: "api/v1/marcas/1/modelos").to route_to("api/v1/modelos#show", marca_id: "1")
+    end
 
     it "routes to #create" do
       expect(post: "api/v1/modelos").to route_to("api/v1/modelos#create")

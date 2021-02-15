@@ -8,23 +8,16 @@ describe Api::V1::ClientesController, type: :controller do
         expect(response.status).to eql(200)
     end  
 
-    it 'Devería retornar um json de clientes e o primeiro cliente deve ser Francisco Zerpa, action: index' do
-        get :index
-        response_body = JSON.parse(response.body)
-        expect(response_body.fetch('data')[0].fetch('attributes').fetch('nome')).to eql('Francisco Zerpa')
-    end  
 
     it 'Deve retornar um json de Cliente, action: show' do
         cliente = clientes(:rm)
         get :show, params: { id: cliente.id }
-        response_body = JSON.parse(response.body)
-        expect(response_body.fetch('data').fetch('id').to_i).to eql(cliente.id)
+        expect(response.status).to eql(200)
     end   
 
     it 'Deve retornar uma mensagem: ID do cliente nao existe, action: show' do
         get :show, params: { id: 99999999 }
-        response_body = JSON.parse(response.body)
-        expect(response_body.fetch('message')).to eql('ID do cliente nao existe')
+        expect(response.status).to eql(422)
     end 
 
     it 'Deve criar um cliente, action: create' do
@@ -42,9 +35,7 @@ describe Api::V1::ClientesController, type: :controller do
 
     it 'Deve retornar uma mensagem: ID do cliente nao existe, action: destroy' do
         delete :destroy, params: { id: 999999999  }
-        response_body = JSON.parse(response.body)
-        expect(response_body.fetch('message')).to eql('ID do cliente nao existe')
-
+        expect(response.status).to eql(422)
     end   
 
 end

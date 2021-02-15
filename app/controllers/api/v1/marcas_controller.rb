@@ -13,7 +13,6 @@ module Api
       def show
         if !@marca.nil?
           render json: @marca
-          #render json: MarcaSerializer.new(@marca)
         else
           render json: {status: 'ERROR', message:'ID ou nome da marca nao existe'},status: :unprocessable_entity
         end  

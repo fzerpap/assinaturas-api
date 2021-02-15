@@ -13,28 +13,26 @@ describe Api::V1::AssinaturasController, type: :controller do
         expect(response.status).to eql(200)
     end  
 
-    it 'Devería retornar um json de assinaturas e a primeira deve ter um imei 123456789012345, action: index' do
-        get :index
-        response_body = JSON.parse(response.body)
-        expect(response_body.fetch('data')[0].fetch('attributes').fetch('imei')).to eql('123456789012345')
-    end  
-
     it 'Deve retornar um json de Assinatura, action: show' do
         assinatura = assinaturas(:afz2)
         get :show, params: { id: assinatura.id }
-        response_body = JSON.parse(response.body)
-        expect(response_body.fetch('data').fetch('id').to_i).to eql(assinatura.id)
+        expect(response.status).to eql(200)
     end  
 
-    it 'Deve retornar uma mensagem: ID da assinatura nao existe, action: show' do
+    it 'Deve retornar um json de Assinaturas para un cliente action: show' do
+        cliente = clientes(:fz)
+        get :show, params: { cliente_id: cliente.id }
+        expect(response.status).to eql(200)
+    end  
+    
+    it 'Deve retornar um status de erro porque o ID da assinatura nao existe, action: show' do
         get :show, params: { id: 99999999 }
-        response_body = JSON.parse(response.body)
-        expect(response_body.fetch('message')).to eql('ID da assinatura nao existe')
+        expect(response.status).to eql(422)
     end   
 
     it 'Deve criar uma assinatura, action: create' do
         post :create, params: { "assinatura": { imei: "567898765456777", preco_anual: 240.40,
-                                num_parcelas: 6, modelo: @modelo, cliente: @cliente,
+                                num_parcelas: 6, modelo_id: @modelo.id, cliente_id: @cliente.id,
                                 data_emisao: Date.today, data_vencimento: Date.today+365 }}
         expect(response.status).to eql(201)
     end  

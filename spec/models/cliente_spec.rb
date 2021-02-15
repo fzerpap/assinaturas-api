@@ -20,19 +20,6 @@ RSpec.describe Cliente, type: :cliente do
   end
   context 'Validacao de atributos do modelo' do
 
-    it 'Devería ser valido com todos os atributos e atributos aninhados da assinatura' do
-     
-      cliente = Cliente.new(nome: 'Antonio Parra Zerpa', cpf: '1011169911155551777117667390', email: 'aparra@gmail.com')
-      cliente.assinaturas.build({imei: '817655669918990', preco_anual: 340.00, num_parcelas: 4, 
-                  modelo_id: 25, data_emisao: Date.today, data_vencimento: Date.today+365})
-      
-      #lambda { cliente.save }.should change(Cliente, :count).by(1)  
-      
-      cliente.save    
-      cliente.valid?.should be_truthy
-
-    end
-
     it 'Devería ser valido com todos os atributos' do
       cliente = Cliente.create(nome: 'Benjamin Zerpa', cpf: '23987667854', email: 'bzerpa@gmail.com') 
       cliente.valid?.should be_truthy
@@ -44,7 +31,7 @@ RSpec.describe Cliente, type: :cliente do
       cliente.valid?.should be_falsey
     end
 
-    it 'Nao devería ser valido com nome nulo e cpf nula' do
+    it 'Nao devería ser valido com nome nulo e cpf nulo' do
       cliente = Cliente.create(nome: nil, cpf: nil, email: 'bparra@gmail.com') 
       cliente.valid?.should be_falsey
     end
@@ -60,7 +47,7 @@ RSpec.describe Cliente, type: :cliente do
     end
 
     it 'Devería excluir o cliente' do
-      cliente = clientes(:ym)
+      cliente = clientes(:rm)
       cliente.destroy
       cliente.valid?.should be_truthy
     end

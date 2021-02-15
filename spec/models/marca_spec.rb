@@ -8,7 +8,7 @@ RSpec.describe Marca, type: :marca do
     it 'Devería has_many :modelos' do
       marca = marcas(:samsung)
       modelos = marca.modelos
-      expect(modelos.count).to eql(2)
+      expect(modelos.count).to eql(3)
 
     end
 

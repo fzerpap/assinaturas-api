@@ -56,14 +56,7 @@ RSpec.describe Assinatura, type: :assinatura do
       assinatura.valid?.should be_falsey
     end
 
-    it 'Nao devería ser valido com imei que já existe' do
-      assinatura = Assinatura.create(imei: '123456789012345', preco_anual: 340.00, num_parcelas: 4, 
-        modelo: @modelo, cliente: @cliente, data_emisao: Date.today, 
-        data_vencimento: Date.today+365) 
-      assinatura.valid?.should be_falsey
-    end
-
-
+ 
   end
 
 end

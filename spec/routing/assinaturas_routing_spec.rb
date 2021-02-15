@@ -10,6 +10,10 @@ RSpec.describe Api::V1::AssinaturasController, type: :routing do
       expect(get: "api/v1/assinaturas/1").to route_to("api/v1/assinaturas#show", id: "1")
     end
 
+    it "routes to #show" do
+      expect(get: "api/v1/clientes/1/assinaturas").to route_to("api/v1/assinaturas#show", cliente_id: "1")
+    end
+
 
     it "routes to #create" do
       expect(post: "api/v1/assinaturas").to route_to("api/v1/assinaturas#create")
